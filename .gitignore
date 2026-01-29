@@ -1,0 +1,54 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Build output
+/build
+/coverage
+
+# Environment and local config
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# PCAP files - never upload to repo (may contain sensitive data)
+*.pcap
+*.pcapng
+*.cap
+
+# PCAP test folders (users create these locally)
+/RegressionTestsInput/
+/SampleCaptures/
+
+# Regression test output (generated)
+/RegressionTestsOutput/
+/SampleCapturesReencoded/
+
+# Playwright test output
+/test-results/
+/playwright-report/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary files
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code local config
+/.claude/
+

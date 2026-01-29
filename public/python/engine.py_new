@@ -1,0 +1,95 @@
+    def _generate_template_script(self, ctx: DissectionContext, hex_data: str) -> str:
+        NL = "\n"
+        command = "from binascii import unhexlify, hexlify" + NL
+        command += "import copy, sys, os" + NL + NL
+        command += "# Add Templates library to path" + NL
+        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+        possible_dirs = [os.path.join(base_dir, "Templates"), "/home/pyodide/Templates", "/Templates", "./Templates"]
+        templates_dir = "/home/pyodide/Templates"
+        for d in possible_dirs:
+            if os.path.exists(os.path.join(d, "Ethernet.py")):
+                templates_dir = d; break
+        command += f"if '{templates_dir}' not in sys.path: sys.path.append('{templates_dir}')" + NL + NL
+
+        command += "def engine_inject(struct, key, new_val):" + NL
+        command += "    if isinstance(struct, dict):" + NL
+        command += "        if key in struct: struct[key] = new_val; return struct, True" + NL
+        command += "        for k, v in struct.items():" + NL
+        command += "            res, ok = engine_inject(v, key, new_val)" + NL
+        command += "            if ok: struct[k] = res; return struct, True" + NL
+        command += "    if isinstance(struct, list):" + NL
+        command += "        for i, v in enumerate(struct):" + NL
+        command += "            res, ok = engine_inject(v, key, new_val)" + NL
+        command += "            if ok: struct[i] = res; return struct, True" + NL
+        command += "    if isinstance(struct, tuple):" + NL
+        command += "        new_items = []; found = False" + NL
+        command += "        for v in struct:" + NL
+        command += "            res, ok = engine_inject(v, key, new_val)" + NL
+        command += "            new_items.append(res)" + NL
+        command += "            if ok: found = True" + NL
+        command += "        if found: return tuple(new_items), True" + NL
+        command += "    return struct, False" + NL + NL
+
+        try:
+            valid_layers = [lyr for lyr in ctx.layers if lyr.name in PROTOCOL_METADATA or lyr.protocol in PROTOCOL_METADATA or lyr.protocol == "Raw"]
+            if not valid_layers:
+                return "# No valid layers found for script generation"
+                
+            layers_rev = valid_layers[::-1]
+            blocks = []
+            last_bin_var = None
+            for i, pl in enumerate(layers_rev):
+                name = pl.protocol if pl.protocol in PROTOCOL_METADATA else pl.name.split(' (')[0]
+                meta = PROTOCOL_METADATA.get(name, {"provider": Provider.SCAPY, "payload_field": "load"})
+                clean_name = str(name).replace("/", "_").replace("-", "_").replace(" ", "_").lower()
+                var_prefix = f"{clean_name}_{i}"
+                template_name = str(name).replace("/", "_").replace("-", "_").replace(" ", "_")
+                has_template = os.path.exists(os.path.join(templates_dir, f"{template_name}.py"))
+                block = NL + f"# --- Layer: {name} ---" + NL
+                l_hex = hex_data[pl.offset*2 : (pl.offset+pl.length)*2]
+                if has_template:
+                    block += f"import {template_name}" + NL
+                    inst_data = ctx.get_instance(pl.index)
+                    val = copy.deepcopy(inst_data.get('val', {{}})) if inst_data else {{}}
+                    target_field = meta.get('payload_field', 'load' if meta['provider'] == Provider.SCAPY else 'data')
+                    if last_bin_var:
+                        if isinstance(val, dict):
+                            for f in ['load', 'data', 'components', 'payload', target_field]:
+                                if f in val: val[f] = b""
+                    block += f"{var_prefix}_val = {safe_repr(val)}" + NL
+                    ok_var = f"ok_{i}"
+                    if last_bin_var:
+                        block += f"# Encapsulate {last_bin_var} into '{target_field}'" + NL
+                        block += f"{var_prefix}_val, {ok_var} = engine_inject({var_prefix}_val, '{target_field}', unhexlify({last_bin_var}))" + NL
+                        block += f"if not {ok_var} and isinstance({var_prefix}_val, dict): {var_prefix}_val['{target_field}'] = unhexlify({last_bin_var}); {ok_var} = True" + NL
+                    else:
+                        block += f"{ok_var} = True" + NL
+                    block += f"{var_prefix}_bin = {template_name}.encode({var_prefix}_val)" + NL
+                    if last_bin_var:
+                        block += f"if not {ok_var}: {var_prefix}_bin += {last_bin_var}" + NL
+                    last_bin_var = f"{var_prefix}_bin"
+                else:
+                    block += f"{var_prefix}_bin = '{l_hex}'" + NL
+                    if last_bin_var: block += f"{var_prefix}_bin += {last_bin_var}"
+                    last_bin_var = f"{var_prefix}_bin"
+                blocks.append(block)
+            command += "".join(blocks) + NL
+            
+            root_layer = layers_rev[-1]
+            max_pos = 0
+            for lyr in valid_layers:
+                end_pos = lyr.offset + lyr.length
+                if end_pos > max_pos: max_pos = end_pos
+            total_len = max_pos - root_layer.offset
+            
+            command += NL + "# --- FINAL RE-ENCODING ---" + NL
+            command += f"telco_bin = unhexlify({last_bin_var})" + NL
+            command += f"telco_offset = {root_layer.offset}" + NL
+            command += f"telco_old_len = {total_len}" + NL
+            command += NL + "if __name__ == '__main__':" + NL
+            command += "    import os; from scapy.all import wrpcap, Ether" + NL
+            command += "    pkt = Ether(telco_bin)" + NL
+            command += "    wrpcap(os.path.basename(__file__).replace('.py', '.pcap'), [pkt])" + NL
+        except Exception as e:
+            command += NL + f"# Script Generation Error: {e}" + NL
+        return command.replace('\x00', '')

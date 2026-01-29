@@ -1,0 +1,610 @@
+{
+  "OpenVPN": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "Telnet": {
+    "field": "data='[0-9a-fA-F]+'",
+    "replacement": "data='414243'"
+  },
+  "TNS": {
+    "field": "packet_type=[0-9]+",
+    "replacement": "packet_type=1"
+  },
+  "S7Comm": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "IEC104": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "MMS": {
+    "field": "'Message-Type': '[^']+'",
+    "replacement": "'Message-Type': 'm-send-req'"
+  },
+  "H265": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "BFD": {
+    "field": "version=[0-9]+",
+    "replacement": "version=1"
+  },
+  "PTP": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "MySQL": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "HTTP2": {
+    "field": "type=[0-9]+",
+    "replacement": "type=0"
+  },
+  "EAPOL": {
+    "field": "version=[0-9]+",
+    "replacement": "version=1"
+  },
+  "DNS": {
+    "field": "id=[0-9]+",
+    "replacement": "id=1234"
+  },
+  "IPv6": {
+    "field": "hlim=[0-9]+",
+    "replacement": "hlim=64"
+  },
+  "CDP": {
+    "field": "ttl=[0-9]+",
+    "replacement": "ttl=123"
+  },
+  "SMB": {
+    "field": "Command=[0-9]+",
+    "replacement": "Command=114"
+  },
+  "CAMEL": {
+    "field": "'serviceKey': [0-9]+",
+    "replacement": "'serviceKey': 123"
+  },
+  "Ethernet": {
+    "field": "dst='[0-9a-fA-F:]+'",
+    "replacement": "dst='02:02:02:02:02:02'"
+  },
+  "IP": {
+    "field": "ttl=[0-9]+",
+    "replacement": "ttl=123"
+  },
+  "TCP": {
+    "field": "sport=[0-9]+",
+    "replacement": "sport=12345"
+  },
+  "UDP": {
+    "field": "dport=[0-9]+",
+    "replacement": "dport=54321"
+  },
+  "SCTP": {
+    "field": "tag=[0-9]+",
+    "replacement": "tag=11223344"
+  },
+  "M3UA": {
+    "field": "\\[\\[1, 0, ([0-9]+), ([0-9]+),",
+    "replacement": "[[1, 0, 9, \\2,"
+  },
+  "SCCP": {
+    "field": "'val': \\[9, \\[([0-9]+),",
+    "replacement": "'val': [9, [1,"
+  },
+  "GTP": {
+    "field": "'val': \\[\\[([0-9]+), ([0-9]+), ([0-9]+), ([0-9]+), ([0-9]+), ([0-9]+), ([0-9]+), ([0-9]+), ([0-9]+)\\]",
+    "replacement": "'val': [[\\1, \\2, \\3, \\4, \\5, \\6, \\7, 999, \\9]"
+  },
+  "Diameter": {
+    "field": ", 257, 0, ([0-9]+), ([0-9]+)\\]",
+    "replacement": ", 257, 0, 12345678, \\2]"
+  },
+  "ARP": {
+    "field": "op=[0-9]+",
+    "replacement": "op=2"
+  },
+  "TCAP": {
+    "field": "'otid': unhexlify\\('([0-9a-fA-F]+)'\\)",
+    "replacement": "'otid': unhexlify('01020304')"
+  },
+  "DHCP": {
+    "field": "xid=[0-9]+",
+    "replacement": "xid=305419896"
+  },
+  "Radius": {
+    "field": "code=[0-9]+",
+    "replacement": "code=2"
+  },
+  "IGMP": {
+    "field": "type=[0-9]+",
+    "replacement": "type=18"
+  },
+  "NGAP": {
+    "field": "'RAN-UE-NGAP-ID', [0-9]+",
+    "replacement": "'RAN-UE-NGAP-ID', 123456"
+  },
+  "S1AP": {
+    "field": "'ENB-UE-S1AP-ID', [0-9]+",
+    "replacement": "'ENB-UE-S1AP-ID', 152"
+  },
+  "BGP": {
+    "field": "type=[0-9]+",
+    "replacement": "type=2"
+  },
+  "OSPF": {
+    "field": "type=[0-9]+",
+    "replacement": "type=2"
+  },
+  "RIP": {
+    "field": "cmd=[0-9]+",
+    "replacement": "cmd=2"
+  },
+  "MPLS": {
+    "field": "label=[0-9]+",
+    "replacement": "label=100"
+  },
+  "STP": {
+    "field": "portid=[0-9]+",
+    "replacement": "portid=123"
+  },
+  "LLDP": {
+    "field": "subtype=[0-9]+",
+    "replacement": "subtype=4"
+  },
+  "AH": {
+    "field": "spi=[0-9]+",
+    "replacement": "spi=12345"
+  },
+  "ESP": {
+    "field": "spi=[0-9]+",
+    "replacement": "spi=54321"
+  },
+  "MQTT": {
+    "field": "type=[0-9]+",
+    "replacement": "type=2"
+  },
+  "TFTP": {
+    "field": "op=[0-9]+",
+    "replacement": "op=2"
+  },
+  "Dot11": {
+    "field": "type=[0-9]+",
+    "replacement": "type=1"
+  },
+  "Dot1Q": {
+    "field": "vlan=[0-9]+",
+    "replacement": "vlan=100"
+  },
+  "ICMP": {
+    "field": "type=[0-9]+",
+    "replacement": "type=0"
+  },
+  "ICMPv6": {
+    "field": "type=[0-9]+",
+    "replacement": "type=129"
+  },
+  "NTP": {
+    "field": "stratum=[0-9]+",
+    "replacement": "stratum=2"
+  },
+  "SNMP": {
+    "field": "version=[0-9]+",
+    "replacement": "version=1"
+  },
+  "HTTP": {
+    "field": "Method='[A-Z]+'",
+    "replacement": "Method='POST'"
+  },
+  "ISIS": {
+    "field": "pdu_type=[0-9]+",
+    "replacement": "pdu_type=15"
+  },
+  "VRRP": {
+    "field": "priority=[0-9]+",
+    "replacement": "priority=255"
+  },
+  "CoAP": {
+    "field": "type=[0-9]+",
+    "replacement": "type=2"
+  },
+  "MobileIP": {
+    "field": "type=[0-9]+",
+    "replacement": "type=3"
+  },
+  "EIGRP": {
+    "field": "opcode=[0-9]+",
+    "replacement": "opcode=5"
+  },
+  "NTLM": {
+    "field": "MessageType=[0-9]+",
+    "replacement": "MessageType=2"
+  },
+  "CAP": {
+    "field": "'serviceKey': [0-9]+",
+    "replacement": "'serviceKey': 456"
+  },
+  "PFCP": {
+    "field": "version=[0-9]+",
+    "replacement": "version=1"
+  },
+  "Kerberos": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "Netlink": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "DCERPC": {
+    "field": "ver_major=[0-9]+",
+    "replacement": "ver_major=5"
+  },
+  "TDS": {
+    "field": "type=[0-9]+",
+    "replacement": "type=1"
+  },
+  "ISUP": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "UDS": {
+    "field": "service=[0-9]+",
+    "replacement": "service=16"
+  },
+  "DoIP": {
+    "field": "payload_type=[0-9]+",
+    "replacement": "payload_type=1"
+  },
+  "SOMEIP": {
+    "field": "msg_id=[0-9]+",
+    "replacement": "msg_id=123"
+  },
+  "TCAP_MAP": {
+    "field": "'imsi': unhexlify\\('11111111111111f1'\\)",
+    "replacement": "'imsi': unhexlify('22111111111111f1')"
+  },
+  "FTP": {
+    "field": "load=unhexlify\\('[0-9a-fA-F]+'\\)",
+    "replacement": "load=unhexlify('464f4f0d0a')"
+  },
+  "SMTP": {
+    "field": "load=unhexlify\\('[0-9a-fA-F]+'\\)",
+    "replacement": "load=unhexlify('48454c4f0d0a')"
+  },
+  "POP3": {
+    "field": "load=unhexlify\\('[0-9a-fA-F]+'\\)",
+    "replacement": "load=unhexlify('555345520d0a')"
+  },
+  "IMAP": {
+    "field": "load=unhexlify\\('[0-9a-fA-F]+'\\)",
+    "replacement": "load=unhexlify('4c4f47494e0d0a')"
+  },
+  "SSH": {
+    "field": "packet_length=[0-9]+",
+    "replacement": "packet_length=100"
+  },
+  "LDAP": {
+    "field": "messageID=[0-9]+",
+    "replacement": "messageID=99"
+  },
+  "RTSP": {
+    "field": "Method='[A-Z]+'",
+    "replacement": "Method='PLAY'"
+  },
+  "RTP": {
+    "field": "sequence=[0-9]+",
+    "replacement": "sequence=12345"
+  },
+  "SIP": {
+    "field": "load=unhexlify\\('[0-9a-fA-F]+'\\)",
+    "replacement": "load=unhexlify('494e564954450d0a')"
+  },
+  "MGCP": {
+    "field": "transaction_id=[0-9]+",
+    "replacement": "transaction_id=12345"
+  },
+  "HSRP": {
+    "field": "priority=[0-9]+",
+    "replacement": "priority=100"
+  },
+  "GRE": {
+    "field": "proto=[0-9]+",
+    "replacement": "proto=2048"
+  },
+  "VXLAN": {
+    "field": "vni=[0-9]+",
+    "replacement": "vni=12345"
+  },
+  "L2TP": {
+    "field": "tunnel_id=[0-9]+",
+    "replacement": "tunnel_id=100"
+  },
+  "Modbus": {
+    "field": "transId=[0-9]+",
+    "replacement": "transId=1234"
+  },
+  "DCCP": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "LoRaWAN": {
+    "field": "MType=[0-9]+",
+    "replacement": "MType=0"
+  },
+  "ZigbeeNWK": {
+    "field": "destination=[0-9]+",
+    "replacement": "destination=1234"
+  },
+  "DNP3": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "CAN": {
+    "field": "identifier=[0-9]+",
+    "replacement": "identifier=100"
+  },
+  "BOOTP": {
+    "field": "xid=[0-9]+",
+    "replacement": "xid=12345678"
+  },
+  "CookedLinux": {
+    "field": "pkttype=[0-9]+",
+    "replacement": "pkttype=0"
+  },
+  "DHCP6": {
+    "field": "msgtype=[0-9]+",
+    "replacement": "msgtype=1"
+  },
+  "DHCP6OptClientId": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "DHCP6OptElapsedTime": {
+    "field": "elapsedtime=[0-9]+",
+    "replacement": "elapsedtime=100"
+  },
+  "DHCP6OptIA_PD": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "DHCP6OptOptReq": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "DHCP6_Advertise": {
+    "field": "msgtype=[0-9]+",
+    "replacement": "msgtype=2"
+  },
+  "DHCP6_Reply": {
+    "field": "msgtype=[0-9]+",
+    "replacement": "msgtype=7"
+  },
+  "DHCP6_Request": {
+    "field": "msgtype=[0-9]+",
+    "replacement": "msgtype=3"
+  },
+  "DHCP6_Solicit": {
+    "field": "msgtype=[0-9]+",
+    "replacement": "msgtype=1"
+  },
+  "Dot11Beacon": {
+    "field": "beacon_interval=[0-9]+",
+    "replacement": "beacon_interval=100"
+  },
+  "Dot15d4": {
+    "field": "fcf_frametype=[0-9]+",
+    "replacement": "fcf_frametype=1"
+  },
+  "Dot3": {
+    "field": "len=[0-9]+",
+    "replacement": "len=100"
+  },
+  "Ether": {
+    "field": "dst='[0-9a-fA-F:]+'",
+    "replacement": "dst='02:02:02:02:02:02'"
+  },
+  "GTPHeader": {
+    "field": "version=[0-9]+",
+    "replacement": "version=1"
+  },
+  "GTPv2C": {
+    "field": "'val': \\[\\[([0-9]+), ([0-9]+), ([0-9]+),",
+    "replacement": "'val': [[\\1, \\2, 99,"
+  },
+  "HCI_Cmd_Inquiry": {
+    "field": "num_responses=[0-9]+",
+    "replacement": "num_responses=10"
+  },
+  "HCI_Command_Hdr": {
+    "field": "len=[0-9]+",
+    "replacement": "len=5"
+  },
+  "HCI_Hdr": {
+    "field": "type=[0-9]+",
+    "replacement": "type=1"
+  },
+  "HDLC": {
+    "field": "control=[0-9]+",
+    "replacement": "control=0"
+  },
+  "ICMPv6EchoRequest": {
+    "field": "id=[0-9]+",
+    "replacement": "id=1234"
+  },
+  "ICMPv6MLReport2": {
+    "field": "reserved=[0-9]+",
+    "replacement": "reserved=0"
+  },
+  "ICMPv6NDOptDstLLAddr": {
+    "field": "lladdr='[0-9a-fA-F:]+'",
+    "replacement": "lladdr='02:02:02:02:02:02'"
+  },
+  "ICMPv6NDOptSrcLLAddr": {
+    "field": "lladdr='[0-9a-fA-F:]+'",
+    "replacement": "lladdr='02:02:02:02:02:02'"
+  },
+  "ICMPv6ND_NA": {
+    "field": "tgt='[0-9a-fA-F:]+'",
+    "replacement": "tgt='::1'"
+  },
+  "ICMPv6ND_NS": {
+    "field": "tgt='[0-9a-fA-F:]+'",
+    "replacement": "tgt='::1'"
+  },
+  "IPX": {
+    "field": "tc=[0-9]+",
+    "replacement": "tc=0"
+  },
+  "IPv6ExtHdrHopByHop": {
+    "field": "nh=[0-9]+",
+    "replacement": "nh=59"
+  },
+  "LLC": {
+    "field": "dsap=[0-9]+",
+    "replacement": "dsap=170"
+  },
+  "Loopback": {
+    "field": "type=[0-9]+",
+    "replacement": "type=2"
+  },
+  "M2UA": {
+    "field": "'val': \\[\\[([0-9]+), ([0-9]+), ([0-9]+),",
+    "replacement": "'val': [[\\1, 0, \\3,"
+  },
+  "MTP3": {
+    "field": "'val': \\[([0-9]+), ([0-9]+),",
+    "replacement": "'val': [\\1, 0,"
+  },
+  "NAS5G": {
+    "field": "'val': \\[([0-9]+),",
+    "replacement": "'val': [1,"
+  },
+  "NASLTE": {
+    "field": "'val': \\[([0-9]+),",
+    "replacement": "'val': [1,"
+  },
+  "NBTSession": {
+    "field": "TYPE=[0-9]+",
+    "replacement": "TYPE=0"
+  },
+  "PPP": {
+    "field": "proto=[0-9]+",
+    "replacement": "proto=33"
+  },
+  "PPPDirection": {
+    "field": "direction=[0-9]+",
+    "replacement": "direction=0"
+  },
+  "PPP_LCP_Configure": {
+    "field": "id=[0-9]+",
+    "replacement": "id=1"
+  },
+  "PPP_LCP_Terminate": {
+    "field": "id=[0-9]+",
+    "replacement": "id=1"
+  },
+  "PPP_Link_Layer": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "PPP_PAP_Request": {
+    "field": "id=[0-9]+",
+    "replacement": "id=1"
+  },
+  "PPP_over_Ethernet": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "PPPoE": {
+    "field": "sessionid=[0-9]+",
+    "replacement": "sessionid=1"
+  },
+  "PPPoED": {
+    "field": "sessionid=[0-9]+",
+    "replacement": "sessionid=0"
+  },
+  "PPPoED_Tags": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "Padding": {
+    "field": "load='[0-9a-fA-F]+'",
+    "replacement": "load='00000000'"
+  },
+  "RADIUS": {
+    "field": "code=[0-9]+",
+    "replacement": "code=2"
+  },
+  "RIPEntry": {
+    "field": "AF=[0-9]+",
+    "replacement": "AF=2"
+  },
+  "RadioTap": {
+    "field": "version=[0-9]+",
+    "replacement": "version=0"
+  },
+  "Raw": {
+    "field": "load='[0-9a-fA-F]+'",
+    "replacement": "load='deadbeef'"
+  },
+  "SCTPChunkCookieAck": {
+    "field": "flags=[0-9]+",
+    "replacement": "flags=0"
+  },
+  "SCTPChunkCookieEcho": {
+    "field": "flags=[0-9]+",
+    "replacement": "flags=0"
+  },
+  "SCTPChunkData": {
+    "field": "tsn=[0-9]+",
+    "replacement": "tsn=12345"
+  },
+  "SCTPChunkInit": {
+    "field": "init_tag=[0-9]+",
+    "replacement": "init_tag=12345"
+  },
+  "SCTPChunkInitAck": {
+    "field": "init_tag=[0-9]+",
+    "replacement": "init_tag=12345"
+  },
+  "SCTPChunkSACK": {
+    "field": "cumul_tsn=[0-9]+",
+    "replacement": "cumul_tsn=12345"
+  },
+  "SMB2": {
+    "field": "Command=[0-9]+",
+    "replacement": "Command=0"
+  },
+  "SMS": {
+    "field": "'_sms_type': '[^']+'",
+    "replacement": "'_sms_type': 'SMS_DELIVER'"
+  },
+  "SNAP": {
+    "field": "OUI=[0-9]+",
+    "replacement": "OUI=0"
+  },
+  "SixLoWPAN": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "TFTP_RRQ": {
+    "field": "filename='[^']+'",
+    "replacement": "filename='test.txt'"
+  },
+  "TLS": {
+    "field": "type=[0-9]+",
+    "replacement": "type=22"
+  },
+  "WTAP": {
+    "field": "raw",
+    "replacement": "raw"
+  },
+  "ZigBee": {
+    "field": "raw",
+    "replacement": "raw"
+  }
+}
